@@ -12,7 +12,6 @@ export default function Specials() {
             Online Menu
           </Link>
         </div>
-        
         <div className="specials-grid">
           <article className="special-card">
             <Image

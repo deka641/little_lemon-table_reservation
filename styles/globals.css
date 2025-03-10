@@ -215,6 +215,109 @@ body {
   font-weight: 500;
 }
 
+/* Testimonials Section */
+.testimonials {
+  background-color: var(--color-gray-light);
+  padding: 4rem 0;
+}
+
+.testimonials-title {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.testimonial-rating {
+  color: var(--color-primary-yellow);
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+.testimonial-profile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.testimonial-image {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.testimonial-text {
+  color: var(--color-gray-dark);
+  font-style: italic;
+}
+
+/* Chicago Section */
+.chicago {
+  padding: 4rem 0;
+}
+
+.chicago-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 4rem;
+  align-items: center;
+}
+
+.chicago-content {
+  padding-right: 2rem;
+}
+
+.chicago-title {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 500;
+  color: var(--color-primary-green);
+  margin-bottom: 0.5rem;
+}
+
+.chicago-subtitle {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.chicago-text {
+  font-size: 18px;
+  margin-bottom: 1.5rem;
+  max-width: 65ch;
+}
+
+.chicago-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.chicago-image {
+  border-radius: 16px;
+  object-fit: cover;
+}
+
 /* Footer */
 .footer {
   background-color: var(--color-primary-green);
@@ -264,7 +367,8 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .hero-container {
+  .hero-container,
+  .chicago-container {
     grid-template-columns: 1fr;
     text-align: center;
   }
@@ -286,5 +390,13 @@ body {
   
   .social-links {
     justify-content: center;
+  }
+  
+  .chicago-content {
+    padding-right: 0;
+  }
+  
+  .chicago-images {
+    grid-template-columns: 1fr;
   }
 }
