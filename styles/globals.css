@@ -64,6 +64,7 @@ body {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
+  padding: 0.5rem 1rem;
 }
 
 .nav-link:hover {
@@ -115,32 +116,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* Buttons */
-.button {
-  display: inline-block;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: transform 0.2s;
-  cursor: pointer;
-  border: none;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-}
-
-.button-primary {
-  background-color: var(--color-primary-yellow);
-  color: var(--color-gray-dark);
-}
-
-.button-secondary {
-  background-color: var(--color-primary-green);
-  color: white;
 }
 
 /* Specials Section */
@@ -277,7 +252,7 @@ body {
 
 .chicago-container {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
 }
@@ -365,6 +340,107 @@ body {
   gap: 1rem;
 }
 
+/* Booking Form Styles */
+.booking-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary-green);
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 2px solid var(--color-gray-light);
+  border-radius: 8px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-primary-green);
+  box-shadow: 0 0 0 3px rgba(73, 94, 87, 0.1);
+}
+
+.form-input:hover,
+.form-select:hover {
+  border-color: var(--color-primary-green);
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23495E57' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+}
+
+.form-button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-gray-dark);
+  background-color: var(--color-primary-yellow);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(244, 206, 20, 0.3);
+}
+
+.form-button:active {
+  transform: translateY(0);
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s;
+  cursor: pointer;
+  border: none;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  background-color: var(--color-primary-yellow);
+  color: var(--color-gray-dark);
+}
+
+.button-secondary {
+  background-color: var(--color-primary-green);
+  color: white;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-container,
@@ -375,6 +451,10 @@ body {
   
   .nav-menu {
     display: none;
+  }
+  
+  .nav-menu.flex {
+    display: flex;
   }
   
   .specials-header {
@@ -398,5 +478,33 @@ body {
   
   .chicago-images {
     grid-template-columns: 1fr;
+  }
+  
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 48px;
+  }
+  
+  .hero-content h2 {
+    font-size: 32px;
+  }
+  
+  .chicago-title {
+    font-size: 48px;
+  }
+  
+  .chicago-subtitle {
+    font-size: 32px;
   }
 }
