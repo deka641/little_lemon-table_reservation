@@ -71,6 +71,11 @@ body {
   color: var(--color-primary-green);
 }
 
+.nav-link.active {
+  font-weight: 800;
+  color: var(--color-primary-green);
+}
+
 /* Hero Section */
 .hero {
   background-color: var(--color-primary-green);
@@ -214,7 +219,7 @@ body {
   background: white;
   padding: 2rem;
   border-radius: 16px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .testimonial-rating {

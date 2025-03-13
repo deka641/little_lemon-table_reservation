@@ -21,6 +21,7 @@ export default function BookingForm({
             required
             className="form-input"
             min={new Date().toISOString().split('T')[0]}
+            aria-required="true"
           />
         </div>
   
@@ -35,6 +36,7 @@ export default function BookingForm({
             onChange={onInputChange}
             required
             className="form-select"
+            aria-required="true"
           >
             <option value="">Select a time</option>
             {availableTimes.map(time => (
@@ -57,6 +59,7 @@ export default function BookingForm({
             onChange={onInputChange}
             required
             className="form-input"
+            aria-required="true"
           />
         </div>
   
@@ -71,6 +74,7 @@ export default function BookingForm({
             onChange={onInputChange}
             required
             className="form-select"
+            aria-required="true"
           >
             <option value="">Select an occasion</option>
             {occasions.map(occasion => (
@@ -85,6 +89,7 @@ export default function BookingForm({
           type="submit"
           className="form-button"
           disabled={isSubmitting}
+          aria-disabled={isSubmitting}
         >
           {isSubmitting ? 'Submitting...' : 'Make Your Reservation'}
         </button>
