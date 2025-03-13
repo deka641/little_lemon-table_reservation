@@ -1,8 +1,29 @@
-import { useState } from 'react';
+import { useState, useReducer } from 'react';
 
 import Nav from '../components/Nav';
 import BookingForm from '../components/BookingForm';
 import Footer from '../components/Footer';
+
+const initializeTimes = () => [
+  '17:00',
+  '18:00',
+  '19:00',
+  '20:00',
+  '21:00',
+  '22:00'
+];
+
+const updateTimes = (state, action) => {
+  switch (action.type) {
+    case 'update':
+      if (action.date === '2025-04-15') {
+        return ['18:00', '20:00'];
+      }
+      return initializeTimes();
+    default:
+      return state;
+  }
+};
 
 export default function Reservations() {
   const [formData, setFormData] = useState({
@@ -12,15 +33,7 @@ export default function Reservations() {
     occasion: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const availableTimes = [
-    '17:00',
-    '18:00',
-    '19:00',
-    '20:00',
-    '21:00',
-    '22:00'
-  ];
+  const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
 
   const occasions = [
     { value: 'birthday', label: 'Birthday' },
@@ -35,13 +48,15 @@ export default function Reservations() {
       ...prev,
       [name]: value
     }));
+    if (name === 'date') {
+      dispatch({ type: 'update', date: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // In a real application, this would submit to an API
       console.log('Submitting reservation:', formData);
       setFormData({
         date: '',
