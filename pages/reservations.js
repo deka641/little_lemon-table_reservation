@@ -25,6 +25,8 @@ const updateTimes = (state, action) => {
   }
 };
 
+export { initializeTimes, updateTimes };
+
 export default function Reservations() {
   const [formData, setFormData] = useState({
     date: '',
