@@ -39,7 +39,7 @@ export default function BookingForm({
             aria-required="true"
           >
             <option value="">Select a time</option>
-            {availableTimes.map(time => (
+            {(Array.isArray(availableTimes) ? availableTimes : []).map(time => (
               <option key={time} value={time}>{time}</option>
             ))}
           </select>
