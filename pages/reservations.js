@@ -1,5 +1,6 @@
-import { fetchAPI } from '../lib/api';
+import { fetchAPI, submitAPI } from '../lib/api';
 import { useState, useReducer, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import Nav from '../components/Nav';
 import BookingForm from '../components/BookingForm';
 import Footer from '../components/Footer';
@@ -30,6 +31,7 @@ export default function Reservations() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   // Reducer state for available time slots.
   const [availableTimes, dispatch] = useReducer(availableTimesReducer, []);
+  const router = useRouter();
 
   // Fetch available time slots for the given date and update the state.
   const updateAvailableTimes = useCallback(async (date, actionType = 'update') => {
@@ -74,12 +76,19 @@ export default function Reservations() {
     setIsSubmitting(true);
     try {
       console.log('Submitting reservation:', formData);
-      // Reset form after successful submission.
-      setFormData(DEFAULT_FORM_DATA);
-      alert('Reservation submitted successfully!');
+      const isSubmitted = await submitAPI(formData);
+      if (isSubmitted) {
+        // Reset form after successful submission.
+        setFormData(DEFAULT_FORM_DATA);
+        router.push({
+          pathname: '/reservationSuccess',
+          query: formData
+        });
+      } else {
+        alert('Failed to submit reservation. Please try again.');
+      }
     } catch (error) {
       console.error('Error submitting reservation:', error);
-      alert('Failed to submit reservation. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -102,7 +111,6 @@ export default function Reservations() {
   const formAreaStyle = { flex: '0 0 70%' };
   const timesBoxStyle = {
     flex: '0 0 30%',
-    border: '1px solid #ccc',
     padding: '1rem',
     borderRadius: '4px',
     background: '#ffffff'

@@ -12,13 +12,15 @@ export default function Nav() {
   return (
     <nav className="nav">
       <div className="container nav-container">
-        <Image 
-          src="/logo.svg" 
-          alt="Little Lemon" 
-          width={150} 
-          height={50}
-          className="nav-logo"
-        />
+        <Link href="/">
+          <Image 
+            src="/logo.svg" 
+            alt="Little Lemon" 
+            width={150} 
+            height={50}
+            className="nav-logo"
+          />
+        </Link>
         <ul className="nav-menu">
           <li><Link href="/" className={isActive('/')} aria-current={router.pathname === '/' ? 'page' : undefined}>Home</Link></li>
           <li><Link href="/about" className={isActive('/about')} aria-current={router.pathname === '/about' ? 'page' : undefined}>About</Link></li>
