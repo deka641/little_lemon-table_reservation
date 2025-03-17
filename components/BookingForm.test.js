@@ -5,7 +5,7 @@ import BookingForm from './BookingForm';
 
 // Mock data and functions
 const mockFormData = {
-  date: '2025-03-15',
+  date: new Date().toISOString().split('T')[0], // Ensure date is today or in the future
   time: '18:00',
   guests: '2',
   occasion: 'birthday',
@@ -135,6 +135,36 @@ describe('BookingForm Component', () => {
       );
       expect(screen.getByText('21:00')).toBeInTheDocument();
       expect(screen.getByText('22:00')).toBeInTheDocument();
+    });
+  });
+
+  describe('Form Validation', () => {
+    test('displays validation message for invalid date', () => {
+      fireEvent.change(screen.getByLabelText(/choose date/i), { target: { value: '2025-03-15' } });
+      fireEvent.blur(screen.getByLabelText(/choose date/i));
+      // Wait for validation message to appear
+      expect(screen.findByText(/please select a valid date/i)).resolves.toBeInTheDocument();
+    });
+
+    test('displays validation message for invalid time', () => {
+      fireEvent.change(screen.getByLabelText(/choose time/i), { target: { value: '' } });
+      fireEvent.blur(screen.getByLabelText(/choose time/i));
+      // Wait for validation message to appear
+      expect(screen.findByText(/please select a time/i)).resolves.toBeInTheDocument();
+    });
+
+    test('displays validation message for invalid number of guests', () => {
+      fireEvent.change(screen.getByLabelText(/number of guests/i), { target: { value: '0' } });
+      fireEvent.blur(screen.getByLabelText(/number of guests/i));
+      // Wait for validation message to appear
+      expect(screen.findByText(/guests must be between 1 and 10/i)).resolves.toBeInTheDocument();
+    });
+
+    test('displays validation message for invalid occasion', () => {
+      fireEvent.change(screen.getByLabelText(/occasion/i), { target: { value: '' } });
+      fireEvent.blur(screen.getByLabelText(/occasion/i));
+      // Wait for validation message to appear
+      expect(screen.findByText(/please select an occasion/i)).resolves.toBeInTheDocument();
     });
   });
 });
