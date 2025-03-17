@@ -53,12 +53,15 @@ const ReservationSuccess = () => {
   const { query } = useRouter();
   const { date, time, guests, occasion } = query;
 
+  // Ensure occasion is defined before capitalizing
+  const formattedOccasion = occasion ? capitalizeFirstLetter(occasion) : 'N/A';
+
   // Create an array of reservation details to be displayed
   const reservationDetails = [
-    { label: 'Date', value: date },
-    { label: 'Time', value: time },
-    { label: 'Guests', value: guests },
-    { label: 'Occasion', value: capitalizeFirstLetter(occasion) }
+    { label: 'Date', value: date || 'N/A' },
+    { label: 'Time', value: time || 'N/A' },
+    { label: 'Guests', value: guests || 'N/A' },
+    { label: 'Occasion', value: formattedOccasion }
   ];
 
   return (
