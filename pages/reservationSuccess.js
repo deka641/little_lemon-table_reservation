@@ -66,27 +66,31 @@ const ReservationSuccess = () => {
 
   return (
     <>
-      <Nav />
-      <main className="container">
+      <header>
+        <Nav />
+      </header>
+      <main className="container" aria-labelledby="reservation-success-title">
         <div style={CONTAINER_STYLE}>
-          <h1 style={TITLE_STYLE}>Reservation Successful!</h1>
+          <h1 id="reservation-success-title" style={TITLE_STYLE}>Reservation Successful!</h1>
           <p style={MESSAGE_STYLE}>
             Thank you for your reservation at Little Lemon. We look forward to welcoming you!
           </p>
-          <div style={DETAILS_CONTAINER_STYLE}>
+          <section style={DETAILS_CONTAINER_STYLE} aria-label="Reservation Details" aria-live="polite">
             {/* Render reservation details as a list */}
             <ul style={{ padding: 0, listStyleType: 'none' }}>
               {reservationDetails.map((detail) => (
-                <li key={detail.label} style={DETAIL_ITEM_STYLE}>
+                <li key={detail.label} style={DETAIL_ITEM_STYLE} aria-label={detail.label}>
                   <span style={DETAIL_LABEL_STYLE}>{detail.label}:</span>{' '}
                   <span style={DETAIL_VALUE_STYLE}>{detail.value}</span>
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
         </div>
       </main>
-      <Footer />
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 };

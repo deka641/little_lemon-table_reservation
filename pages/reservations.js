@@ -137,14 +137,16 @@ export default function Reservations() {
 
   return (
     <>
-      <Nav />
-      <main className="container">
+      <header>
+        <Nav />
+      </header>
+      <main className="container" aria-labelledby="reservation-form-title">
         <div style={containerStyle}>
-          <h1 style={titleStyle}>Reserve a Table</h1>
+          <h1 id="reservation-form-title" style={titleStyle}>Reserve a Table</h1>
           <p style={descriptionStyle}>
             Please fill out the form below to make a reservation at Little Lemon. We look forward to serving you!
           </p>
-          <div style={layoutStyle}>
+          <section style={layoutStyle} aria-label="Reservation Form and Available Times">
             <div style={formAreaStyle}>
               <BookingForm 
                 formData={formData}
@@ -159,10 +161,12 @@ export default function Reservations() {
               <h2 style={timesTitleStyle}>Available Times</h2>
               {availableTimesContent}
             </div>
-          </div>
+          </section>
         </div>
       </main>
-      <Footer />
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }

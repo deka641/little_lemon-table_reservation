@@ -10,7 +10,7 @@ export default function Nav() {
   const isActive = (path) => router.pathname === path ? 'nav-link active' : 'nav-link';
 
   return (
-    <nav className="nav">
+    <nav className="nav" aria-label="Main Navigation">
       <div className="container nav-container">
         <Link href="/">
           <Image 
