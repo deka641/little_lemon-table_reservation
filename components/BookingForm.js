@@ -22,6 +22,12 @@ export default function BookingForm({
     guests: false,
     occasion: false,
   });
+  const [dirtyFields, setDirtyFields] = useState({
+    date: false,
+    time: false,
+    guests: false,
+    occasion: false,
+  });
   const [submitAttempted, setSubmitAttempted] = useState(false);
 
   // Mark a field as touched when it loses focus.
@@ -48,10 +54,19 @@ export default function BookingForm({
     setIsFormValid(isDateValid && isTimeValid && isGuestsValid && isOccasionValid);
   }, [formData, todayDate]);
 
-  // Retrieve an error message for a specific field if it has been touched and is invalid.
+  // Debugging: Log validation checks for the occasion field
+  useEffect(() => {
+    console.log('Occasion validation check:', {
+      occasion: formData.occasion,
+      isOccasionValid: formData.occasion !== '',
+      touched: touchedFields.occasion
+    });
+  }, [formData.occasion, touchedFields.occasion]);
+
+  // Retrieve an error message for a specific field if it has been interacted with and is invalid.
   const getFieldError = useCallback(
     (fieldName) => {
-      if (!touchedFields[fieldName]) return '';
+      if (!dirtyFields[fieldName]) return '';
       switch (fieldName) {
         case 'date':
           return formData.date < todayDate ? 'Please select a valid date.' : '';
@@ -62,28 +77,32 @@ export default function BookingForm({
             ? 'Guests must be between 1 and 10.'
             : '';
         case 'occasion':
-          return formData.occasion === '' ? 'Please select an occasion.' : '';
+          return formData.occasion === '' ? 'Select an occasion.' : '';
         default:
           return '';
       }
     },
-    [formData, touchedFields, todayDate]
+    [dirtyFields, formData, todayDate]
   );
 
   // Handle form submission: mark all fields as touched, log debug info, and call onSubmit if the form is valid.
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    setTouchedFields({
-      date: true,
-      time: true,
-      guests: true,
-      occasion: true,
-    });
     console.log('Form validity on submit:', isFormValid);
     console.log('Touched fields:', touchedFields);
+    
     if (isFormValid) {
+      // Don't set all fields as touched when form is valid
+      // This prevents validation errors from showing briefly
       onSubmit(event);
     } else {
+      // Only set touched fields and show errors for invalid form
+      setTouchedFields({
+        date: true,
+        time: true,
+        guests: true,
+        occasion: true,
+      });
       setSubmitAttempted(true);
     }
   };
@@ -128,7 +147,7 @@ export default function BookingForm({
               id="date"
               name="date"
               value={formData.date}
-              onChange={onInputChange}
+              onChange={(e) => { !dirtyFields.date && setDirtyFields(prev => ({...prev, date:true})); onInputChange(e); }}
               required
               className="form-input"
               min={todayDate}
@@ -150,7 +169,7 @@ export default function BookingForm({
               id="time"
               name="time"
               value={formData.time}
-              onChange={onInputChange}
+              onChange={(e) => { !dirtyFields.time && setDirtyFields(prev => ({...prev, time:true})); onInputChange(e); }}
               required
               className="form-select"
               aria-required="true"
@@ -181,7 +200,7 @@ export default function BookingForm({
               min="1"
               max="10"
               value={formData.guests}
-              onChange={onInputChange}
+              onChange={(e) => { !dirtyFields.guests && setDirtyFields(prev => ({...prev, guests:true})); onInputChange(e); }}
               required
               className="form-input"
               aria-required="true"
@@ -202,7 +221,7 @@ export default function BookingForm({
               id="occasion"
               name="occasion"
               value={formData.occasion}
-              onChange={onInputChange}
+              onChange={(e) => { !dirtyFields.occasion && setDirtyFields(prev => ({...prev, occasion:true})); onInputChange(e); }}
               required
               className="form-select"
               aria-required="true"
